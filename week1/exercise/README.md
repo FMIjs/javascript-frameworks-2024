@@ -9,8 +9,8 @@
 
 В хода на упражнението разгледахме и следните неща от TypeScript:
 
-- `is` оператора - [линк](https://www.typescriptlang.org/docs/handbook/advanced-types.html#user-defined-type-guards)
-- Различни utility оператори ([линк](https://www.typescriptlang.org/docs/handbook/utility-types.html)
+- `is` оператора ([линк](https://www.typescriptlang.org/docs/handbook/advanced-types.html#user-defined-type-guards))
+- Различни utility оператори ([линк](https://www.typescriptlang.org/docs/handbook/utility-types.html))
   - `Partial`
   - `Omit`
   - `Pick`
