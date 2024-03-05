@@ -24,11 +24,19 @@ const validators = {
   Number: (val: any) => typeof val === "number",
 };
 
-function createSchemaFor<T extends object>(
-  config: Record<keyof T, keyof typeof validators>
-): Record<keyof T, (typeof validators)[keyof typeof validators]> {
-  const validation = {} as Record<keyof T, (val: any) => boolean>;
-  for (const [key, value] of objectEntries(config)) {
+function createSchemaFor<
+  T extends object,
+  CFG extends Record<keyof T, keyof typeof validators> = Record<
+    keyof T,
+    keyof typeof validators
+  >
+>(config: CFG): Record<keyof T, (typeof validators)[keyof typeof validators]> {
+  const validation = {} as Record<
+    keyof T,
+    (typeof validators)[keyof typeof validators]
+  >;
+  for (const entry of objectEntries(config)) {
+    const [key, value] = entry as [keyof T, keyof typeof validators];
     validation[key] = validators[value];
   }
   return validation;

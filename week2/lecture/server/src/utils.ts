@@ -1,7 +1,16 @@
-type Entries<T> = {
-  [K in keyof T]: [K, T[K]];
-}[keyof T][];
+import { Entry, LiteralTuple } from "./types/helpers";
 
-export function objectEntries<T extends Record<string, any>>(obj: T) {
-  return Object.entries(obj) as Entries<T>;
+export function createTuple<T extends ReadonlyArray<number | string | object>>(
+  ...args: T
+): LiteralTuple<T> {
+  return Object.freeze(args);
 }
+
+export function objectEntries<T extends object>(
+  object: T
+): ReadonlyArray<Entry<T>> {
+  return Object.entries(object) as unknown as ReadonlyArray<Entry<T>>;
+}
+
+const r1 = objectEntries([1, 2, 3] as const);
+const r2 = objectEntries({ a: 1, b: 2 });
