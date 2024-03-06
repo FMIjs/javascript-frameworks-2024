@@ -73,7 +73,7 @@ function addUser(newUser: UserCreationAttributes): User {
   return newUserEntry;
 }
 
-router.get("/", (req, res) => {
+router.get("/", (req, res) => { // api/user/
   res.send(users);
 });
 

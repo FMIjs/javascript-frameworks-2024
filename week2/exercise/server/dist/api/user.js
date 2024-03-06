@@ -24,7 +24,8 @@ const validators = {
 };
 function createSchemaFor(config) {
     const validation = {};
-    for (const [key, value] of (0, utils_1.objectEntries)(config)) {
+    for (const entry of (0, utils_1.objectEntries)(config)) {
+        const [key, value] = entry;
         validation[key] = validators[value];
     }
     return validation;

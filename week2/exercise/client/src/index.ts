@@ -1,14 +1,10 @@
-fetch("http://localhost:8081/api/user")
-  .then((res) => res.json())
-  .then(console.log);
-
-const btn = document.getElementById("fetch-users-btn");
-console.log(btn);
-
-btn.addEventListener("click", () => {
-  fetch("http://localhost:8081/api/user")
-    .then((res) => res.json())
-    .then(console.log);
-});
+const fetchTodos = fetch("http://localhost:8081/api/todo")
+  .then((res) => res.json());
 
 
+const app = async () => {
+  const todos = await fetchTodos;
+  console.log(todos);
+};
+
+app();
