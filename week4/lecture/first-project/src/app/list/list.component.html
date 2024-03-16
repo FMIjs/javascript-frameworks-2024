@@ -1,0 +1,10 @@
+<div *ngIf="!items.length">No items</div>
+<ul *ngIf="items.length">
+  <li
+    *ngFor="let item of items; let i = index"
+    [appLineThrough]="item.completed"
+    (click)="toggleCompleteHandler(i)"
+  >
+    {{ item.text }}
+  </li>
+</ul>

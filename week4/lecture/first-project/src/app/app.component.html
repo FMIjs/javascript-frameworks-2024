@@ -1,0 +1,44 @@
+<!-- @if(!items.length) {
+<div>No items</div>
+} @else {
+<ul>
+  @for(text of items; track text) {
+  <li>{{ text }}</li>
+  }
+</ul>
+} -->
+
+<!-- <ng-template [ngIf]="!items.length">
+  <div>HELLO</div>
+</ng-template> -->
+
+<!-- <div *ngIf="!items.length">No items</div>
+<ul *ngIf="items.length"> -->
+<!-- <li *ngFor="let text of items">{{ text }}</li> -->
+<!-- <ng-template ngFor [ngForOf]="items" let-text>
+    <li>{{ text }}</li>
+  </ng-template>
+</ul> -->
+
+<!-- {{}} <- interpolation -->
+<!-- [] <- binding -->
+<!-- () <- event listen -->
+<!-- # <- template variables -->
+
+<app-new-item
+  [placeholderText]="placeholderValue"
+  (newItem)="newItemHandler($event)"
+/>
+<app-list [items]="items" (toggleCompleted)="toggleCompleteHandler($event)" />
+<!--
+function render(context) {
+  const p1 = createTextNode(context['message']);
+  const p2 = createElement('input');
+  const myTextInput = p2;
+  p2.addAttribute('type', 'text');
+  const p3 = createElement('button');
+  p3.addEventListener(($event) => context['buttonClickHandler'].call(context, myTextInput));
+  const p3_p1 = createTextNode("Set text");
+  p3.append(p3_p1);
+}
+-->
