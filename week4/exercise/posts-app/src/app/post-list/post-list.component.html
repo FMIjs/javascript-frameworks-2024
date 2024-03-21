@@ -1,0 +1,28 @@
+@if((posts$ | async); as posts){
+  @if(!posts.length)
+  {
+    <div>No posts found</div>
+  }
+  @else{
+    <h1>Posts</h1>
+    <div class="posts-container">
+      <div class="flex-1 d-flex-column">
+        @for(post of posts; track post)
+        {
+          <a
+            [routerLink]="[post.id]"
+            [class.post-selected]="selectedPostId === post.id">
+              {{post.title}}
+          </a>
+        }
+    </div>
+
+    <div class="flex-1">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  }
+}
+@else{
+  <div>Loading posts</div>
+}
