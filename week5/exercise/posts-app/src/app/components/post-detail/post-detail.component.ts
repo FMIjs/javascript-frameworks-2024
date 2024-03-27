@@ -1,8 +1,8 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
-import { PostService } from '../services/post.service';
+import { Component, HostBinding, Input, OnDestroy, OnInit, inject } from '@angular/core';
+import { PostService } from '../../services/post.service';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
-import { IPost } from '../interfaces/post';
+import { IPost } from '../../interfaces/post';
 import { AsyncPipe } from '@angular/common';
 
 @Component({
@@ -17,6 +17,8 @@ export class PostDetailComponent implements OnInit, OnDestroy {
   private readonly route = inject(ActivatedRoute);
   private subscription : Subscription | null = null;
   post$ : Observable<IPost> | null = null;
+
+  @HostBinding('class.green-background') isGreenBackground = true;
 
   ngOnInit(): void {
     this.subscription = this.route.params.subscribe(params => {
