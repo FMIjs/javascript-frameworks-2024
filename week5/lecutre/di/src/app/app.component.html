@@ -1,0 +1,11 @@
+@for(user of users; track user.id) {
+<div>{{ user.name }}</div>
+}
+
+<app-user [name]="title">
+  <div #test></div>
+</app-user>
+<!-- 
+  const p4 = di.get(view.getComponentFactory("app-user")) // constructor is called
+  p4.setValue("name", view.getVariables("title"));
+-->
