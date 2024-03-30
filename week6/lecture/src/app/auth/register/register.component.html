@@ -1,0 +1,32 @@
+<h2>Register</h2>
+<form [formGroup]="registerForm" (ngSubmit)="formSubmitHandler()">
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="text" id="email" formControlName="email" />
+    @if(registerForm.get("email")?.errors; as emailErrors) {
+    <div class="errors">
+      @if(emailErrors?.['required']) { Email is required }
+      @if(emailErrors?.['email']) { Email is invalid }
+    </div>
+    }
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="text" id="password" formControlName="password" />
+    @if(registerForm.get("password")?.errors; as passwordErrors) {
+    <div class="errors">
+      @if(passwordErrors?.['required']) { Password is required }
+    </div>
+    }
+  </div>
+  <div class="form-group">
+    <label for="passwordRepeat">Repeat password</label>
+    <input type="text" id="passwordRepeat" formControlName="passwordRepeat" />
+    @if(registerForm.get("passwordRepeat")?.errors; as passwordRepeatErrors) {
+    <div class="errors">
+      @if(passwordRepeatErrors?.['matchField']) { Values don't match }
+    </div>
+    }
+  </div>
+  <button>Register</button>
+</form>

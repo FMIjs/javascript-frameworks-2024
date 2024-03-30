@@ -1,0 +1,14 @@
+<div id="navigation">
+  <nav>
+    @if(authService.isLoggedIn$ | async) {
+    <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+    } @else {
+    <a routerLink="/login" routerLinkActive="active">Login</a>
+    <a routerLink="/register" routerLinkActive="active">Register</a>
+    }
+    <a routerLink="/about" routerLinkActive="active">About</a>
+  </nav>
+  @if(authService.isLoggedIn$ | async) {
+  <button (click)="logoutHandler()">Logout</button>
+  }
+</div>
