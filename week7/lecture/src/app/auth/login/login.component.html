@@ -1,0 +1,59 @@
+<h2>Login</h2>
+<form #loginForm="ngForm" (ngSubmit)="formSubmitHandler()">
+  <div *ngIf="isLoading">Loading...</div>
+  <div class="form-group">
+    <label for="email">Email:</label>
+    <input
+      type="text"
+      id="email"
+      name="email"
+      #emailControl="ngModel"
+      ngModel
+      email
+      required
+    />
+    <div *ngIf="emailControl.touched && emailControl.invalid" class="error">
+      <ng-container *ngIf="!!emailControl.errors?.['required']">
+        Email is required
+      </ng-container>
+      <ng-container *ngIf="!!emailControl.errors?.['email']">
+        Email is invalid
+      </ng-container>
+    </div>
+  </div>
+  <input ngModel="test" name="test" />
+  <div class="form-group">
+    <label for="password">Password:</label>
+    <input
+      type="password"
+      id="password"
+      name="password"
+      #passwordControl="ngModel"
+      ngModel
+      appMatchingField="test"
+      required
+    />
+    {{ passwordControl.errors | myJson : undefined : 4 }}
+    <div
+      *ngIf="passwordControl.touched && passwordControl.invalid"
+      class="error"
+    >
+      <ng-container *ngIf="!!passwordControl.errors?.['required']">
+        Password is required
+      </ng-container>
+    </div>
+  </div>
+  <button [disabled]="loginForm.invalid || isLoading">Login</button>
+  <div *ngIf="wrongEmailOrPassword">Wrong email or password!</div>
+</form>
+
+{{ loginForm.value | myJson }}
+
+<!-- 
+  const p1 = createHtmlElement('form');
+  attachDirectives(p1, [ngForm]);
+  
+  ...
+  
+  const loginForm = p1;
+-->

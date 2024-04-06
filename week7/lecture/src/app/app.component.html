@@ -1,0 +1,6 @@
+@if (isAuthenticating$ | async) {
+<div>Authenticating...</div>
+} @else {
+<app-navigation></app-navigation>
+<router-outlet />
+}
