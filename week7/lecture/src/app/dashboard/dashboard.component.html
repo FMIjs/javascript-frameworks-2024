@@ -1,0 +1,22 @@
+<h1>Dashboard</h1>
+@if (users) {
+<ng-container>
+  @if (users.length > 0) {
+  <ul>
+    @for (user of users; track user.id) {
+    <li [routerLink]="['/dashboard', user.id]">{{ user.name }}</li>
+    }
+  </ul>
+  } @else if(users) {
+  <div>No users</div>
+  }
+</ng-container>
+} @else if(user) {
+{{ user | json }}
+@if(user.id > 1) {
+<button [routerLink]="['/dashboard', user.id - 1]">Prev users</button>
+}
+<button [routerLink]="['/dashboard', user.id + 1]">Next user</button>
+}@else {
+<div>Loading...</div>
+}
