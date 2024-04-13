@@ -1,0 +1,26 @@
+
+.toolbar {
+  display: flex;
+  align-items: flex-end;
+}
+
+.posts-container{
+  display: flex;
+
+  .flex-1{
+    flex: 1;
+  }
+
+  .d-flex-column{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.post-selected{
+  font-style: italic;
+  font-weight: bold;
+  background-color: aquamarine;
+
+}

@@ -1,0 +1,23 @@
+@if (usersList$ | async; as usersList) {
+<div class="user-list">
+  @if (!usersList.length) {
+  <!-- usersList ==> [] -->
+  <div class="msg">No users</div>
+  }
+  @for (user of usersList; track user.id) {
+  <!-- usersList ==> [..,..,..,...] -->
+  <div class="user">
+    {{ user.name }}
+  </div>
+  }
+</div>
+}
+@else {
+<!-- usersList ==> null -->
+<div class="msg"> Loading...</div>
+}
+
+<div class="pager">
+  <div class="prev" (click)="prevPage()"><=</div>
+  <div class="next"  (click)="nextPage()">=></div>
+</div>

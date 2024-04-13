@@ -1,0 +1,31 @@
+<form [formGroup]="postForm" class="form" (ngSubmit)="submitForm()">
+  <label class="title">Add new post</label>
+
+  <div class="form-field">
+    <label for="title">Title</label>
+    <input type="text" formControlName="title">
+  </div>
+
+  <div class="form-field">
+    <label for="body">Body</label>
+    <input type="text" formControlName="body">
+  </div>
+
+  <div class="form-field">
+    <label for="body">Hash tags (validation purposes)</label>
+    <input type="text" formControlName="hashTags">
+    @if(postForm.touched && postForm.get("hashTags")?.errors; as errors) {
+      @if(errors['invalidHashTags']){
+        <div class="error">Hash tags should start with #</div>
+      }
+      @else {
+        <div class="error">Hash tags required</div>
+      }
+    }
+  </div>
+
+  <div class="action-buttons">
+    <button type="button" (click)="cancel.emit()">Cancel</button>
+    <button type="submit">Save</button>
+  </div>
+</form>
