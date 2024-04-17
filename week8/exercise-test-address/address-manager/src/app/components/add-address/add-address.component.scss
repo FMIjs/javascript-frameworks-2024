@@ -1,0 +1,24 @@
+.field {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+
+  label {
+    flex: 0 0 100px;
+  }
+
+  input {
+    flex: 1;
+  }
+
+  .error{
+    color: darkred;
+    font-size: 0.8rem;
+  }
+}
+
+.buttons{
+  display: flex;
+  gap: 16px;
+}

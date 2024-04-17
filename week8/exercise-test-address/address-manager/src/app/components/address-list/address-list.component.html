@@ -1,1 +1,16 @@
-<p>address-list works!</p>
+<div>
+  <h2>Address List</h2>
+  <button (click)="navigateToAddAddress()">Add Address</button>
+  <ul>
+    <li *ngFor="let address of addresses">
+      <div>
+        <span>
+          {{address.country}}, {{ address.city }}, {{ address.zip }} - {{ address.street }}
+        </span>
+        <button class="delete-button" (click)="deleteAddress(address.id)">
+          <i class="fas fa-trash-alt"></i>
+        </button>
+      </div>
+    </li>
+  </ul>
+</div>

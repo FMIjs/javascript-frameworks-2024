@@ -1,1 +1,41 @@
-<p>add-address works!</p>
+<div>
+  <h2>Add Address</h2>
+  <form [formGroup]="addressForm" (ngSubmit)="formSubmitHandler()">
+    <div class="field">
+      <label for="country">Country:</label>
+      <input type="text" id="country" formControlName="country">
+      <div class="error"
+        *ngIf="addressForm.get('country')?.invalid && (addressForm.get('country')?.dirty || addressForm.get('country')?.touched)">
+        <span *ngIf="addressForm.get('country')?.errors">Country is required</span>
+      </div>
+    </div>
+    <div class="field">
+      <label for="city">City:</label>
+      <input type="text" id="city" formControlName="city">
+      <div class="error"
+        *ngIf="addressForm.get('city')?.invalid && (addressForm.get('city')?.dirty || addressForm.get('city')?.touched)">
+        <span *ngIf="addressForm.get('city')?.errors">City is required</span>
+      </div>
+    </div>
+    <div class="field">
+      <label for="street">Street:</label>
+      <input type="text" id="street" formControlName="street">
+      <div class="error"
+        *ngIf="addressForm.get('street')?.invalid && (addressForm.get('street')?.dirty || addressForm.get('street')?.touched)">
+        <span *ngIf="addressForm.get('street')?.errors">Street is required</span>
+      </div>
+    </div>
+    <div class="field">
+      <label for="zip">Zip Code:</label>
+      <input type="text" id="zip" formControlName="zip">
+      <div class="error"
+        *ngIf="addressForm.get('zip')?.invalid && (addressForm.get('zip')?.dirty || addressForm.get('zip')?.touched)">
+        <span *ngIf="addressForm.get('zip')?.errors">Zip should be at least 4 digits</span>
+      </div>
+    </div>
+    <div class="buttons">
+      <button type="submit">Submit</button>
+      <button type="button" (click)="navigateToAddressList()">Cancel</button>
+    </div>
+  </form>
+</div>

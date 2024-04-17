@@ -1,1 +1,44 @@
 /* You can add global styles to this file, and also import other style files */
+button {
+  background-color: purple;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #6a0080; /* Darken the color on hover */
+}
+
+.delete-button {
+  background-color: purple;
+  color: white;
+  padding: 8px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.delete-button i {
+  font-size: 0.5rem;
+}
+
+.delete-button:hover {
+  background-color: #6a0080; /* Darken the color on hover */
+}
+
+input {
+  border: 2px solid purple;
+  border-radius: 5px;
+  padding: 8px 12px;
+}
+
+input:focus {
+  outline: none; /* Remove default focus outline */
+  border-color: #6a0080; /* Darken the border color on focus */
+}
