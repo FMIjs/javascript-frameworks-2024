@@ -23,8 +23,24 @@ export class AddAddressComponent {
       country: ['', Validators.required],
       city: ['', Validators.required],
       street: ['', Validators.required],
-      zip: ['', Validators.pattern(/^\d{4}$/)],
+      zip: ['', [Validators.required, Validators.pattern(/^\d{4}$/)]],
     });
+  }
+
+  get country() {
+    return this.addressForm.controls['country'];
+}
+
+  get city() {
+      return this.addressForm.controls['city'];
+  }
+
+  get street() {
+    return this.addressForm.controls['street'];
+  }
+
+  get zip() {
+    return this.addressForm.controls['zip'];
   }
 
   formSubmitHandler(): void {
@@ -32,7 +48,7 @@ export class AddAddressComponent {
       this.addressService.addAddress(this.addressForm.value);
       this.router.navigate(['/addresses']);
     } else {
-      // Handle invalid form
+      // Template itself doesn't allow to submit an invalid form so no need to handle this case (see submit button)
     }
   }
 

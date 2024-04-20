@@ -12,6 +12,11 @@ button:hover {
   background-color: #6a0080; /* Darken the color on hover */
 }
 
+button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
 .delete-button {
   background-color: purple;
   color: white;
