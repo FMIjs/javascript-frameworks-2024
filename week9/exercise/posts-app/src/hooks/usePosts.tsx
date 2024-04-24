@@ -5,7 +5,6 @@ import { API_URL } from "../constants";
 
 export const usePosts = () => {
   const [posts, setPosts] = useState<Post[]>([]);
-
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
 
   useEffect(() => {
@@ -28,5 +27,5 @@ export const usePosts = () => {
     setPosts,
     selectPost,
     clearSelectedPost
-  }
+  };
 }
