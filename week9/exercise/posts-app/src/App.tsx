@@ -13,12 +13,10 @@ import { Posts } from './pages/Posts';
 
 
 // Routing solution #2
-const postsRoutes = <>
-  <Route path='/posts'>
-    <Route path='/posts' element={<Posts />} />
-    <Route path='/posts/:postId' element={<Posts />} />
-  </Route>
-</>;
+const postsRoutes = <Route path='/posts'>
+  <Route path='/posts' element={<Posts />} />
+  <Route path='/posts/:postId' element={<Posts />} />
+</Route>;
 
 function App() {
   return (
