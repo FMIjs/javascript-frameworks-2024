@@ -1,16 +1,10 @@
 import './App.css';
-import { PostList } from './components';
-import { usePosts } from './hooks/usePosts';
+import { Posts } from './pages/Posts';
 
 function App() {
-  const { posts, selectPost } = usePosts()
-
   return (
     <div className="App">
-      <PostList
-        posts={posts}
-        postSelectHandler={selectPost}
-      />
+      <Posts />
     </div>
   );
 }
