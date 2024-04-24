@@ -20,7 +20,7 @@ export class AddAddressComponent {
     private router: Router
   ) {
     this.addressForm = this.formBuilder.group({
-      country: ['', Validators.required],
+      country: ['', [Validators.required, Validators.pattern(/^[A-Z][a-z]+/)]],
       city: ['', Validators.required],
       street: ['', Validators.required],
       zip: ['', Validators.pattern(/^\d{4}$/)],

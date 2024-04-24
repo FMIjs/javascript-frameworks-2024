@@ -6,7 +6,8 @@
       <input type="text" id="country" formControlName="country">
       <div class="error"
         *ngIf="addressForm.get('country')?.invalid && (addressForm.get('country')?.dirty || addressForm.get('country')?.touched)">
-        <span *ngIf="addressForm.get('country')?.errors">Country is required</span>
+        <span *ngIf="addressForm.get('country')?.errors?.['required']">Country is required</span>
+        <span *ngIf="addressForm.get('country')?.errors?.['pattern']">Invalid country</span>
       </div>
     </div>
     <div class="field">
