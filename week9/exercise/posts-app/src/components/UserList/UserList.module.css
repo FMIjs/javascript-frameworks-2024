@@ -1,3 +1,7 @@
 .container {
   text-align: initial;
 }
+
+.selectButton {
+  margin-left: 16px;
+}
