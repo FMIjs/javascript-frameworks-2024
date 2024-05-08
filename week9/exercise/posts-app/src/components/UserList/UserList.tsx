@@ -16,6 +16,10 @@ export const UserList = (props: UserListProps) => {
   }, [navigate])
 
   return <div className={styles.container}>
-    {users.map(user => <div key={user.id} onClick={() => selectUser(user.id)}>{user.name}</div>)}
+    {users.map(user =>
+    <div key={user.id}>
+      {user.name}
+      <button className={styles.selectButton} onClick={() => selectUser(user.id)}>Select User</button> 
+    </div>)}
   </div>;
 };
