@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+
+<div id="container" style="display: flex; flex-direction: column;">
+  <button id="btn">Click me</button>
+  <!-- svg goes here -->
+</div>
+
+<script type="module">
+  import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
+
+  const width = 600;
+  const height = 600;
+
+  const svg = d3.create("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+  const lines = [
+    'this',
+    'is',
+    'a',
+    'test',
+  ];
+
+  const yOffsetVar = 20;
+
+  const calcElementY = (i) => yOffsetVar + (yOffsetVar * i) + (i * 5);
+
+  const calcTextWidth = (text) => {
+    // TODO revisit this calculation
+    return text.length * 8;
+  };
+
+  let zoomState = null;
+  const applyZoomTransformations = () => {
+    if (!zoomState) return;
+    const { transform } = zoomState;
+    const { k: scale, x, y } = transform;
+
+    const transformationStyle = `scale(${scale}) translate(${x}px, ${y}px)`;
+
+    svg.selectAll('rect')
+      .style('transform', transformationStyle);
+
+    svg.selectAll('text')
+      .style('transform', transformationStyle);
+  }
+
+
+
+  const update = () => {
+    let texts = svg.selectAll('text').data(lines, d => d);
+
+    texts.enter()
+      .append('rect')
+      .attr('x', 0)
+      .attr('y', (_, i) => calcElementY(i) - 14)
+      .attr('height', yOffsetVar)
+      .attr('width', (data) => calcTextWidth(data));
+
+    texts.join(
+      enter => {
+        applyZoomTransformations();
+        return enter.append('text')
+          .attr('fill', 'red')
+          .text(data => data + ' e')
+      },
+      update => {
+        applyZoomTransformations();
+        return update
+          .attr('fill', 'green')
+          .text(data => data + ' u')
+      },
+      exit => exit
+        .text(data => data + ' d')
+        .attr('fill', 'black')
+        .attr('x', 110)
+    )
+      .attr('x', 0)
+      .attr('y', (_, i) => calcElementY(i))
+      .on('mouseenter', function () {
+        const d3El = d3.select(this);
+        d3El.style('font-weight', 'bold');
+      })
+      .on('mouseleave', function (event, data) {
+        const d3El = d3.select(this);
+        d3El.style('font-weight', 'normal');
+
+        const dataIdx = lines.indexOf(data);
+        if (dataIdx < 0) return;
+        lines[dataIdx] += dataIdx;
+        update();
+      });
+
+  };
+  update();
+
+  setTimeout(() => {
+    lines.push('new line');
+    update();
+  }, 1000);
+
+  btn.addEventListener('click', () => {
+    lines.pop();
+    update();
+    // d3.selectAll('rect')
+    //   .transition()
+    //   .duration(1000)
+    //   .attr('width', function (data) {
+    //     const el = d3.select(this);
+    //     const { width } = el.node().getBoundingClientRect();
+    //     const textWidth = calcTextWidth(data);
+
+    //     return textWidth < width ? textWidth : 100;
+    //   });
+  });
+
+  svg.call(
+    d3.zoom().on("zoom", (zoomData) => {
+      zoomState = zoomData
+      applyZoomTransformations()
+    })
+  );
+
+  container.appendChild(svg.node());
+</script>

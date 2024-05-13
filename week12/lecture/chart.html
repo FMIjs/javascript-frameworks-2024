@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+
+<h1>Chart</h1>
+<div id="container" style="display: flex; flex-direction: column;">
+  <button id="btn">Generate</button>
+  <!-- svg goes here -->
+</div>
+
+<script type="module">
+  import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
+
+  const domainMax = 1000;
+  const getRandomInt = () => Math.floor(Math.random() * domainMax);
+  const generateData = () => new Array(100).fill(null).map((_, i) => ({ key: i, value: getRandomInt() }));
+
+  // const data = [
+  //   467, 285, 876, 392, 589, 721, 105, 273, 603, 865, 598, 935, 215, 746, 458, 317,
+  //   173, 812, 629, 665, 101, 270, 900, 573, 892, 448, 516, 783, 948, 399, 954, 628,
+  //   864, 670, 113, 735, 814, 159, 539, 209, 598, 295, 670, 472, 254, 868, 364, 372,
+  //   456, 907, 422, 943, 198, 960, 991, 663, 792, 777, 416, 368, 171, 822, 738, 849,
+  //   370, 265, 254, 340, 783, 929, 570, 665, 200, 567, 782, 626, 648, 449, 699, 591,
+  //   939, 960, 917, 997, 151, 660, 860, 836, 196, 826, 172, 561, 949, 348, 224, 590,
+  //   203, 305, 535, 847, 448
+  // ];
+
+  let data = generateData()
+
+  const width = 640;
+  const height = 400;
+  const marginTop = 20;
+  const marginRight = 20;
+  const marginBottom = 30;
+  const marginLeft = 40;
+
+  // Declare the x (horizontal position) scale.
+  const x = d3.scaleUtc()
+    .domain([new Date("2023-01-01"), new Date("2024-01-01")])
+    .range([marginLeft, width - marginRight]);
+
+  // Declare the y (vertical position) scale.
+  const y = d3.scaleLinear()
+    .domain([0, domainMax])
+    .range([height - marginBottom, marginTop]);
+
+  // Create the SVG container.
+  const svg = d3.create("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+  // Add the x-axis.
+  svg.append("g")
+    .attr("transform", `translate(0,${height - marginBottom})`)
+    .call(d3.axisBottom(x));
+
+  // // Add the y-axis.
+  svg.append("g")
+    .attr("transform", `translate(${marginLeft},0)`)
+    .call(d3.axisLeft(y));
+
+  const t = (marginTop + height - marginBottom - 20);
+  const calcY = (point) => {
+    if (!point) return 0;
+    const d = point.value;
+    console.log(d);
+    const percentage = (d / (domainMax / 100)) / 100;
+    return t - t * percentage;
+  };
+
+  const update = () => {
+    const circles = svg.selectAll('circle').data(data, d => d.key);
+    circles.join(
+      enter => enter.append('circle'),
+      update => update.attr('fill', 'blue'),
+      exit => exit.remove()
+    )
+      .attr('fill', 'red')
+      .attr('r', 3)
+      .attr('cx', (_, i) => marginLeft + (i * 5.5))
+      .attr('cy', (point) => {
+        const d = point.value;
+        const percentage = (d / (domainMax / 100)) / 100;
+        return t - t * percentage;
+      });
+
+    const lines = svg.selectAll('line').data(data, d => d.key);
+    lines.join(
+      enter => enter.append('line'),
+      update => update,
+      exit => exit.remove()
+    )
+      .attr('stroke', 'red')
+      .attr('x1', (_, i) => marginLeft + (i * 5.5))
+      .attr('x2', (_, i) => marginLeft + ((i + 1) * 5.5))
+      .attr('y1', calcY)
+      .attr('y2', (d, i) => {
+        const nextPoint = data[i + 1];
+        return calcY(nextPoint) || 0;
+      })
+  }
+  update();
+
+  btn.addEventListener('click', () => {
+    data = generateData();
+    update();
+  });
+
+  container.appendChild(svg.node());
+</script>
