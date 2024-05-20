@@ -1,0 +1,8 @@
+<p>dashboard works!</p>
+
+@if(!formSubmitted) {
+  <form ngForm="form" (submit)="onSubmit()">
+    <input type="text" ngModel name="name" required>
+    <button type="submit">Submit</button>
+  </form>
+}
